@@ -1,13 +1,22 @@
-import React from 'react';
-import './App.css';
-import LoginPage from './page/login/LoginPage';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import LoginPage from "./page/login/LoginPage";
+import Dashboard from "./page/Dashboard";
+import ForgotPassword from "./page/login/ForgotPassword";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <LoginPage />
-      </header>
+      <Navbar />
+      <div className="App-header">
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      </div>
     </div>
   );
 }
