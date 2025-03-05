@@ -19,10 +19,10 @@ const LoginPage = () => {
 
   return (
     <div>
-      <h2>Connection</h2>
+      <h2>Connexion</h2>
       <div>
         <label>
-          pseudonyme:
+          Identfiant:
           <input
             type="text"
             value={username}
@@ -41,7 +41,7 @@ const LoginPage = () => {
         </label>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleLogin}>Connection</button>
+      <button onClick={handleLogin}>se connecter</button>
       <div>
         <a href="#">mot de passe oublié ?</a>
       </div>
