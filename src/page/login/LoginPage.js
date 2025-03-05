@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import testData from './loginTestData.json';
 
-const LoginPage = () => {
+const LoginPage = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,7 +11,7 @@ const LoginPage = () => {
       (user) => user.username === username && user.password === password
     );
     if (user) {
-      alert('Login successful!');
+      onLoginSuccess(); // Appelle la fonction pour changer la page après connexion
     } else {
       setError('Invalid username or password');
     }
@@ -32,7 +32,7 @@ const LoginPage = () => {
       </div>
       <div>
         <label>
-          mot de passe:
+          Mot de passe:
           <input
             type="password"
             value={password}
@@ -41,9 +41,9 @@ const LoginPage = () => {
         </label>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleLogin}>se connecter</button>
+      <button onClick={handleLogin}>Se connecter</button>
       <div>
-        <a href="#">mot de passe oublié ?</a>
+        <a href="#">Mot de passe oublié ?</a>
       </div>
     </div>
   );
