@@ -1,41 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from "react-router-dom";
 import '../index.css';
 
-const Chat = () => {
+const Chat = ({ discussion }) => { // On reçoit la discussion en paramètre
   const [messages, setMessages] = useState([]);
-  const navigate = useNavigate();
   const [input, setInput] = useState('');
-  const [setUser] = useState(null);
   const chatEndRef = useRef(null);
   const user = 'Moi';
-  const avatar = 'https://i.pravatar.cc/40?img=10'; // Avatar par défaut
+  const avatar = 'https://i.pravatar.cc/40?img=10';
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-
-    if (!storedUser) {
-      navigate("/"); // Redirige vers Login si non connecté
-    } else {
-      setUser(JSON.parse(storedUser));
-    }
-  }, [navigate, setUser]);
-
-  useEffect(() => {
-    // Charger les messages depuis localStorage
-    const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [
+    // Charger les messages spécifiques à cette discussion depuis localStorage
+    const savedMessages = JSON.parse(localStorage.getItem(`chatMessages_${discussion.id}`)) || [
       { user: 'Alice', text: 'Salut tout le monde !', time: '10:15', avatar: 'https://i.pravatar.cc/40?img=5' },
       { user: 'Bob', text: 'Hello !', time: '10:17', avatar: 'https://i.pravatar.cc/40?img=2' }
     ];
     setMessages(savedMessages);
-  }, []);
+  }, [discussion]);
 
   useEffect(() => {
-    // Sauvegarder les messages dans localStorage à chaque modification
-    localStorage.setItem('chatMessages', JSON.stringify(messages));
-    // Scroll en bas à chaque nouveau message
+    // Sauvegarder les messages dans localStorage
+    localStorage.setItem(`chatMessages_${discussion.id}`, JSON.stringify(messages));
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, discussion]);
 
   const sendMessage = (e) => {
     if (e.key === 'Enter' && input.trim() !== '') {
@@ -70,6 +56,7 @@ const Chat = () => {
 
   return (
     <div className="chat-container">
+      <h2>{discussion.title}</h2>
       <div className="chat-messages">
         {messages.map((msg, index) => (
           <div key={index} className={`chat-message ${msg.user === user ? 'self' : ''}`}>

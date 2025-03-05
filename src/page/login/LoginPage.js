@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import testData from "./loginTestData.json";
 
-const LoginPage = () => {
+const LoginPage = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,7 +23,8 @@ const LoginPage = () => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
       window.dispatchEvent(new Event("storage"));
-      navigate("/dashboard");
+      onLoginSuccess(); // Gestion de l'authentification
+      navigate("/dashboard"); // Redirection vers le tableau de bord
     } else {
       setError("Identifiant ou mot de passe incorrect");
     }
