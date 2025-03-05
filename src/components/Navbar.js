@@ -23,6 +23,7 @@ export default function Navbar() {
             <ul>
                 {!isLoggedIn && <li><Link to="/">Accueil (Login)</Link></li>}
                 {isLoggedIn && <li><Link to="/dashboard">Dashboard</Link></li>}
+                {isLoggedIn && <li><Link to="/chat">Chat</Link></li>}
             </ul>
         </nav>
     );
