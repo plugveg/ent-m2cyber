@@ -1,26 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import testData from "./loginTestData.json"; // Import des utilisateurs
 
 const ForgotPassword = () => {
     const [username, setUsername] = useState("");
     const [message, setMessage] = useState("");
-    const [userExists, setUserExists] = useState(null); // Ajout du state
+    const [userExists] = useState(null); // Ajout du state
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Vérifier si l'utilisateur existe dans loginTestData.json
-        const foundUser = testData.users.some((user) => user.username === username);
-
-        setUserExists(foundUser); // Met à jour l'état de userExists
-
-        if (foundUser) {
-            setMessage("Un lien de réinitialisation a été envoyé.");
-        } else {
-            setMessage("Identifiant incorrect.");
-        }
+        setMessage("Un lien de réinitialisation a été envoyé si votre identifiant est correct.");
     };
 
     return (
