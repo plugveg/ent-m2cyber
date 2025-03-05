@@ -19,7 +19,7 @@ const ForgotPassword = () => {
         if (foundUser) {
             setMessage("Un lien de réinitialisation a été envoyé.");
         } else {
-            setMessage("Identifiant non trouvé.");
+            setMessage("Identifiant incorrect.");
         }
     };
 

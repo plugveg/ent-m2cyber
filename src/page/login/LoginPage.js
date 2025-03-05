@@ -25,7 +25,7 @@ const LoginPage = () => {
       window.dispatchEvent(new Event("storage"));
       navigate("/dashboard");
     } else {
-      setError("Identifiant ou mot de passe incorrect");
+      setError("Identifiant incorrect.");
     }
   };
 
