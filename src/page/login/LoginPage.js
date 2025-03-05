@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
-import testData from './loginTestData.json';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import testData from "./loginTestData.json";
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const handleLogin = () => {
     const user = testData.users.find(
       (user) => user.username === username && user.password === password
     );
+
     if (user) {
-      alert('Login successful!');
+      localStorage.setItem("user", JSON.stringify(user));
+      window.dispatchEvent(new Event("storage"));
+      navigate("/dashboard");
     } else {
-      setError('Invalid username or password');
+      setError("Identifiant ou mot de passe incorrect");
     }
   };
 
@@ -32,7 +44,7 @@ const LoginPage = () => {
       </div>
       <div>
         <label>
-          mot de passe:
+          Mot de passe:
           <input
             type="password"
             value={password}
@@ -40,10 +52,12 @@ const LoginPage = () => {
           />
         </label>
       </div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleLogin}>se connecter</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button onClick={handleLogin}>Se connecter</button>
       <div>
-        <a href="#">mot de passe oublié ?</a>
+        <button onClick={() => navigate("/forgot-password")}>
+          Mot de passe oublié ?
+        </button>
       </div>
     </div>
   );
