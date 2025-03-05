@@ -22,7 +22,7 @@ const LoginPage = () => {
       <h2>Connexion</h2>
       <div>
         <label>
-          Identfiant:
+          Identifiant:
           <input
             type="text"
             value={username}
