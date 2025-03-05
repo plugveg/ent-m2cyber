@@ -65,7 +65,7 @@ const ChatFileUploader = () => {
           <input type="file" onChange={handleFileSelect} hidden />
         </label>
 
-        {fileName && <span className="file-name">📂 {fileName}</span>}
+        {fileName && <span className="file-name"> 💾 {fileName}</span>}
 
         <button className="send-btn" onClick={handleSendFile} disabled={!fileName}>
           ➡️ Envoyer
