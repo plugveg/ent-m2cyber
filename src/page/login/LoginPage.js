@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Connection</h2>
       <div>
         <label>
           pseudonyme:
@@ -41,7 +41,7 @@ const LoginPage = () => {
         </label>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin}>Connection</button>
       <div>
         <a href="#">mot de passe oublié ?</a>
       </div>
