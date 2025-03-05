@@ -4,6 +4,7 @@ import "./App.css";
 import LoginPage from "./page/login/LoginPage";
 import Dashboard from "./page/Dashboard";
 import ForgotPassword from "./page/login/ForgotPassword";
+import Chat from "./components/Chat";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </div>
     </div>
