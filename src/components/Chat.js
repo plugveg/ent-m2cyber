@@ -1,12 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import '../index.css';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
+  const [setUser] = useState(null);
   const chatEndRef = useRef(null);
   const user = 'Moi';
   const avatar = 'https://i.pravatar.cc/40?img=10'; // Avatar par défaut
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (!storedUser) {
+      navigate("/"); // Redirige vers Login si non connecté
+    } else {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [navigate, setUser]);
 
   useEffect(() => {
     // Charger les messages depuis localStorage
