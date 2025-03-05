@@ -21,11 +21,11 @@ export default function Salon() {
   return (
     <div style={{ padding: "20px", maxWidth: "400px", margin: "200px auto", border: "1px solid #ccc", borderRadius: "10px" }}>
       <h2>Créer un salon</h2>
-      
-      <input 
+
+      <input
         type="text"
-        placeholder="Nom du salon" 
-        value={roomName} 
+        placeholder="Nom du salon"
+        value={roomName}
         onChange={(e) => setRoomName(e.target.value)}
         style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
       />
@@ -37,22 +37,22 @@ export default function Salon() {
 
       {roomType === "private" && (
         <>
-          <select 
-            type="number" 
-            value={users} 
-            onChange={(e) => setUsers(Array(e.target.value))} 
+          <select
+            type="number"
+            value={users}
+            onChange={(e) => setUsers(Array(e.target.value))}
             style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
             multiple
           >
-            <option value={1}>Person 1</option>
-            <option value={2}>Person 2</option>
-            <option value={3}>Person 3</option>
-            <option value={4}>Person 4</option>
-            <option value={5}>Person 5</option>
-            <option value={6}>Person 6</option>
-            <option value={7}>Person 7</option>
-            <option value={8}>Person 8</option>
-            <option value={9}>Person 9</option>
+            <option value={1}>Personne 1</option>
+            <option value={2}>Personne 2</option>
+            <option value={3}>Personne 3</option>
+            <option value={4}>Personne 4</option>
+            <option value={5}>Personne 5</option>
+            <option value={6}>Personne 6</option>
+            <option value={7}>Personne 7</option>
+            <option value={8}>Personne 8</option>
+            <option value={9}>Personne 9</option>
           </select>
           <label>
             <input
@@ -62,21 +62,21 @@ export default function Salon() {
             />
             Temporaire ?
           </label>
-         {isTemporary === true && (
-          <>
-            <br/>
-            <label>
-              Date de fermeture :
-              <input
-                type="date"
-                value={closedDate}
-                onChange={(e) => setClosedDate(e.target.value)}
-                style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
-              />
-            </label>
-            
-          </>
-         )} 
+          {isTemporary === true && (
+            <>
+              <br />
+              <label>
+                Date de fermeture :
+                <input
+                  type="date"
+                  value={closedDate}
+                  onChange={(e) => setClosedDate(e.target.value)}
+                  style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
+                />
+              </label>
+
+            </>
+          )}
         </>
       )}
 
