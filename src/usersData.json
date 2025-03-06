@@ -2,7 +2,8 @@
   "users": [
   {
       "username": "testUser1",
-      "password": "password123"
+      "password": "password123",
+      "rights": "admin"
   },
   {
     "username": "testUser2",
