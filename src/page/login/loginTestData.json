@@ -2,15 +2,18 @@
   "users": [
     {
       "username": "testUser1",
-      "password": "password123"
+      "password": "password123",
+      "role": "admin"
     },
     {
       "username": "testUser2",
-      "password": "securePass456"
+      "password": "securePass456",
+      "role": "user"
     },
     {
       "username": "testUser3",
-      "password": "mySecret789"
+      "password": "mySecret789",
+      "role": "user"
     }
   ]
 }
