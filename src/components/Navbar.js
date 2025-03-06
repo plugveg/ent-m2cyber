@@ -4,6 +4,8 @@ import "./Navbar.css"; // Import du CSS
 
 export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
+    const isAdmin = user && user.role === "admin";
 
     useEffect(() => {
         // Vérifie le localStorage à chaque changement
@@ -24,7 +26,7 @@ export default function Navbar() {
                 {!isLoggedIn && <li><Link to="/">Accueil (Login)</Link></li>}
                 {isLoggedIn && <li><Link to="/dashboard">Dashboard</Link></li>}
                 {isLoggedIn && <li><Link to="/chat">Chat</Link></li>}
-                {isLoggedIn && <li><Link to="/Portail_Admin">Portail Admin</Link></li>}
+                {isLoggedIn && isAdmin && <li><Link to="/Portail_Admin">Portail Admin</Link></li>}
             </ul>
         </nav>
     );
