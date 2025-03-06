@@ -1,12 +1,12 @@
 {
   "users": [
     {
-      "username": "admin",
+      "username": "enseignant",
       "password": "admin",
       "role": "admin"
     },
     {
-      "username": "user",
+      "username": "parent-eleve",
       "password": "user",
       "role": "user"
     }

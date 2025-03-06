@@ -22,7 +22,7 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Bienvenue {user.username} ! 🎉</h1>
-            <p>Tu es connecté.</p>
+            <p>Tu es connecté en tant que {user.role}.</p>
         </div>
     );
 };
