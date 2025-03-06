@@ -7,6 +7,8 @@ import ForgotPassword from "./page/login/ForgotPassword";
 import GlobalPage from "./page/GlobalePage";
 import Planning from "./page/Planning"; // Ajout de la route Planning
 import Navbar from "./components/Navbar";
+import PortailAdmin from "./page/Portail Admin";
+import Chat from "./page/Chat"; // Import ajouté pour la route Chat
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("user"));
@@ -44,11 +46,13 @@ function App() {
           {/* Dashboard accessible seulement si authentifié */}
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
           {/* Accès aux discussions uniquement si authentifié */}
-          <Route path="/chat" element={isAuthenticated ? <GlobalPage /> : <Navigate to="/" />} />
+          <Route path="/chat" element={isAuthenticated ? <Chat /> : <Navigate to="/" />} />
           {/* Accès au planning uniquement si authentifié */}
           <Route path="/planning" element={isAuthenticated ? <Planning /> : <Navigate to="/" />} />
           {/* Mot de passe oublié accessible sans restriction */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          {/* Portail Admin accessible uniquement si authentifié */}
+          <Route path="/Portail_Admin" element={isAuthenticated ? <PortailAdmin /> : <Navigate to="/" />} />
         </Routes>
       </div>
     </div>

@@ -22,6 +22,7 @@ const Dashboard = () => {
     return (
         <div style={dashboardStyle}>
             <h1>Bienvenue, {user.username} ! 🎉</h1>
+            <h2>Rôle : {user.role}</h2>
             <p>Tu es connecté.</p>
         </div>
     );

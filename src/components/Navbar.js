@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import "./Navbar.css"; // Import du CSS
 
 export default function Navbar() {
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("user"));
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
+    const isAdmin = user && user.role === "admin";
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -39,6 +41,7 @@ export default function Navbar() {
                 {isLoggedIn && <li><Link to="/dashboard">Dashboard</Link></li>}
                 {isLoggedIn && <li><Link to="/chat">Salon de Discussion</Link></li>}
                 {isLoggedIn && <li><Link to="/planning">Planning</Link></li>}
+                {isLoggedIn && isAdmin && <li><Link to="/Portail_Admin">Portail Admin</Link></li>}
                 {isLoggedIn && (
                     <li>
                         <button onClick={handleLogout} className="logout-button">Déconnexion</button>
