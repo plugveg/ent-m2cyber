@@ -1,0 +1,8 @@
+{
+    "events": [
+      { "id": 1, "title": "Réunion parents-professeurs", "day": "Lundi", "hour": "14", "duration": 2, "month": "Avril", "year": "2025" },
+      { "id": 2, "title": "Sortie scolaire", "day": "Mercredi", "hour": "10", "duration": 3, "month": "Avril", "year": "2025" },
+      { "id": 3, "title": "Conférence pédagogique", "day": "Vendredi", "hour": "16", "duration": 2, "month": "Mai", "year": "2025" }
+    ]
+  }
+  

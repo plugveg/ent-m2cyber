@@ -15,21 +15,14 @@ const Dashboard = () => {
         }
     }, [navigate]);
 
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        window.dispatchEvent(new Event("storage")); // Déclenche la mise à jour
-        navigate("/"); // Déconnexion et retour au Login
-    };
-
     if (!user) {
         return <p>Chargement...</p>;
     }
 
     return (
         <div>
-            <h1>Bienvenue {user.username}, tu es ({user.role}) ! 🎉</h1>
+            <h1>Bienvenue {user.username} ! 🎉</h1>
             <p>Tu es connecté.</p>
-            <button onClick={handleLogout}>Se déconnecter</button>
         </div>
     );
 };

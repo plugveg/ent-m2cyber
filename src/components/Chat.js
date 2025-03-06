@@ -2,18 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 
-const Chat = () => {
+const Chat = ({ discussion }) => {
   const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
   const [input, setInput] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null); // Gère l'affichage de l'image en grand
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const chatEndRef = useRef(null);
-  const avatar = "https://i.pravatar.cc/40?img=10"; // Avatar par défaut
+  const navigate = useNavigate();
+  const avatar = "https://i.pravatar.cc/40?img=10";
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-
     if (!storedUser) {
       navigate("/"); // Redirige vers Login si non connecté
     } else {
@@ -22,18 +21,19 @@ const Chat = () => {
   }, [navigate]);
 
   useEffect(() => {
-    const savedMessages =
-      JSON.parse(localStorage.getItem("chatMessages")) || [
-        { user: "Alice", text: "Salut tout le monde !", time: "10:15", avatar: "https://i.pravatar.cc/40?img=5" },
-        { user: "Bob", text: "Hello !", time: "10:17", avatar: "https://i.pravatar.cc/40?img=2" },
-      ];
+    // Charger les messages spécifiques à cette discussion
+    const savedMessages = JSON.parse(localStorage.getItem(`chatMessages_${discussion.id}`)) || [
+      { user: "Alice", text: "Salut tout le monde !", time: "10:15", avatar: "https://i.pravatar.cc/40?img=5" },
+      { user: "Bob", text: "Hello !", time: "10:17", avatar: "https://i.pravatar.cc/40?img=2" }
+    ];
     setMessages(savedMessages);
-  }, []);
+  }, [discussion]);
 
   useEffect(() => {
-    localStorage.setItem("chatMessages", JSON.stringify(messages));
+    // Sauvegarde des messages dans localStorage
+    localStorage.setItem(`chatMessages_${discussion.id}`, JSON.stringify(messages));
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, discussion]);
 
   const sendMessage = (e) => {
     if (e.key === "Enter" && input.trim() !== "") {
@@ -76,6 +76,7 @@ const Chat = () => {
 
   return (
     <div className="chat-container">
+      <h2>{discussion.title}</h2>
       <div className="chat-messages">
         {messages.map((msg, index) => (
           <div key={index} className={`chat-message ${msg.user === (user ? user.username : "Moi") ? "self" : ""}`}>
