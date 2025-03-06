@@ -3,8 +3,8 @@ import usersData from "./login/loginTestData.json";
 
 const AdminPage = () => {
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({ username: "", password: "", role: "" });
-  const [newUser, setNewUser] = useState({ username: "", password: "", role: "" });
+  const [currentUser, setCurrentUser] = useState({ username: "", password: "", role: "user" });
+  const [newUser, setNewUser] = useState({ username: "", password: "", role: "user" });
 
   useEffect(() => {
     setUsers(usersData.users);
@@ -20,13 +20,25 @@ const AdminPage = () => {
     setNewUser({ ...newUser, [name]: value });
   };
 
+  const validateUser = (user) => {
+    return user.username && user.password && user.role;
+  };
+
   const handleUpdateUser = () => {
-    setUsers(users.map(user => user.username === currentUser.username ? currentUser : user));
+    if (validateUser(currentUser)) {
+      setUsers(users.map(user => user.username === currentUser.username ? currentUser : user));
+    } else {
+      alert("Tous les champs doivent être remplis pour mettre à jour un utilisateur.");
+    }
   };
 
   const handleCreateUser = () => {
-    setUsers([...users, newUser]);
-    setNewUser({ username: "", password: "", role: "" });
+    if (validateUser(newUser)) {
+      setUsers([...users, newUser]);
+      setNewUser({ username: "", password: "", role: "user" });
+    } else {
+      alert("Tous les champs doivent être remplis pour créer un utilisateur.");
+    }
   };
 
   return (
@@ -57,14 +69,15 @@ const AdminPage = () => {
         onChange={handleUserChange}
         style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
       />
-      <input
-        type="text"
+      <select
         name="role"
-        placeholder="Rôle"
         value={currentUser.role}
         onChange={handleUserChange}
         style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
-      />
+      >
+        <option value="admin">admin</option>
+        <option value="user">user</option>
+      </select>
       <button onClick={handleUpdateUser} style={{ display: "block", width: "100%", padding: "10px", marginTop: "10px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "5px" }}>
         Mettre à jour l'utilisateur
       </button>
@@ -86,14 +99,15 @@ const AdminPage = () => {
         onChange={handleNewUserChange}
         style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
       />
-      <input
-        type="text"
+      <select
         name="role"
-        placeholder="Rôle"
         value={newUser.role}
         onChange={handleNewUserChange}
         style={{ display: "block", width: "100%", padding: "8px", marginBottom: "10px" }}
-      />
+      >
+        <option value="admin">admin</option>
+        <option value="user">user</option>
+      </select>
       <button onClick={handleCreateUser} style={{ display: "block", width: "100%", padding: "10px", marginTop: "10px", backgroundColor: "#28a745", color: "white", border: "none", borderRadius: "5px" }}>
         Créer un utilisateur
       </button>
