@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h1>Bienvenue {user.username} ({user.role}) ! 🎉</h1>
+            <h1>Bienvenue {user.username}, tu es ({user.role}) ! 🎉</h1>
             <p>Tu es connecté.</p>
             <button onClick={handleLogout}>Se déconnecter</button>
         </div>
