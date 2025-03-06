@@ -24,6 +24,7 @@ export default function Navbar() {
                 {!isLoggedIn && <li><Link to="/">Accueil (Login)</Link></li>}
                 {isLoggedIn && <li><Link to="/dashboard">Dashboard</Link></li>}
                 {isLoggedIn && <li><Link to="/chat">Chat</Link></li>}
+                {isLoggedIn && <li><Link to="/Portail_Admin">Portail Admin</Link></li>}
             </ul>
         </nav>
     );

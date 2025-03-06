@@ -6,6 +6,7 @@ import Dashboard from "./page/Dashboard";
 import ForgotPassword from "./page/login/ForgotPassword";
 import Chat from "./components/Chat";
 import Navbar from "./components/Navbar";
+import PortailAdmin from "./page/Portail Admin";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/Portail_Admin" element={<PortailAdmin />} />
         </Routes>
       </div>
     </div>
