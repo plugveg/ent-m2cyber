@@ -16,33 +16,15 @@ const Dashboard = () => {
     }, [navigate]);
 
     if (!user) {
-        return <p style={loadingStyle}>Chargement...</p>;
+        return <p>Chargement...</p>;
     }
 
     return (
-        <div style={dashboardStyle}>
-            <h1>Bienvenue, {user.username} ! 🎉</h1>
-            <h2>Rôle : {user.role}</h2>
+        <div>
+            <h1>Bienvenue {user.username} ! 🎉</h1>
             <p>Tu es connecté.</p>
         </div>
     );
-};
-
-/* 🎨 Styles */
-const dashboardStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
-    color: "white",
-    backgroundColor: "#2c2f33",
-};
-
-const loadingStyle = {
-    textAlign: "center",
-    color: "white",
-    fontSize: "18px",
 };
 
 export default Dashboard;
