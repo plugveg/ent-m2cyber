@@ -7,6 +7,7 @@ import ForgotPassword from "./page/login/ForgotPassword";
 import GlobalPage from "./page/GlobalePage";
 import Planning from "./page/Planning";
 import Navbar from "./components/Navbar";
+import AdminPage from "./page/Portail Admin";
 
 function App() {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ function App() {
   }, []);
 
   const handleLoginSuccess = () => {
-    localStorage.setItem("user", "true");
     setIsAuthenticated(true);
     navigate("/dashboard");
   };
@@ -42,6 +42,7 @@ function App() {
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
           <Route path="/chat" element={isAuthenticated ? <GlobalPage /> : <Navigate to="/" />} />
           <Route path="/planning" element={isAuthenticated ? <Planning /> : <Navigate to="/" />} />
+          <Route path="/Portail_Admin" element={isAuthenticated ? <AdminPage /> : <Navigate to="/" />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </div>
