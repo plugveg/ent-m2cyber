@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Salon() {
+export default function Room() {
   const [roomType, setRoomType] = useState("public");
   const [roomName, setRoomName] = useState("");
   const [users, setUsers] = useState([]);

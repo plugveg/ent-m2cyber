@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import testData from "./loginTestData.json";
+import testData from "../../usersData.json";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");

@@ -1,0 +1,39 @@
+
+[
+    {
+        "roomName": "room1",
+        "owner": "testUser1",
+        "members":[
+            "testUser1",
+            "testUser2"
+        ],
+        "messages": [
+            {
+                "message": "Hello",
+                "sender": "testUser1"
+            },
+            {
+                "message": "Hi",
+                "sender": "testUser2"
+            }
+        ]
+    },
+    {
+        "roomName": "room2",
+        "owner": "testUser1",
+        "members":[
+            "testUser1",
+            "testUser3"
+        ],
+        "messages": [
+            {
+                "message": "Hello",
+                "sender": "testUser1"
+            },
+            {
+                "message": "Hi",
+                "sender": "testUser3"
+            }
+        ]
+    }
+]
