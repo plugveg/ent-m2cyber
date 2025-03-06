@@ -15,23 +15,33 @@ const Dashboard = () => {
         }
     }, [navigate]);
 
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        window.dispatchEvent(new Event("storage")); // Déclenche la mise à jour
-        navigate("/"); // Déconnexion et retour au Login
-    };
-
     if (!user) {
-        return <p>Chargement...</p>;
+        return <p style={loadingStyle}>Chargement...</p>;
     }
 
     return (
-        <div>
-            <h1>Bienvenue {user.username} ! 🎉</h1>
+        <div style={dashboardStyle}>
+            <h1>Bienvenue, {user.username} ! 🎉</h1>
             <p>Tu es connecté.</p>
-            <button onClick={handleLogout}>Se déconnecter</button>
         </div>
     );
+};
+
+/* 🎨 Styles */
+const dashboardStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    color: "white",
+    backgroundColor: "#2c2f33",
+};
+
+const loadingStyle = {
+    textAlign: "center",
+    color: "white",
+    fontSize: "18px",
 };
 
 export default Dashboard;

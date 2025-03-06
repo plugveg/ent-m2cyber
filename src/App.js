@@ -1,43 +1,55 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./page/login/LoginPage";
 import Dashboard from "./page/Dashboard";
 import ForgotPassword from "./page/login/ForgotPassword";
-import Chat from "./components/Chat";
+import GlobalPage from "./page/GlobalePage";
+import Planning from "./page/Planning"; // Ajout de la route Planning
 import Navbar from "./components/Navbar";
-import GlobalPage from "./GlobalePage";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("user"));
   const navigate = useNavigate();
 
+  // Vérifie le statut d'authentification et écoute les changements du localStorage
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setIsAuthenticated(true);
-    }
+    const checkAuthStatus = () => {
+      setIsAuthenticated(!!localStorage.getItem("user"));
+    };
+
+    window.addEventListener("storage", checkAuthStatus);
+    return () => window.removeEventListener("storage", checkAuthStatus);
   }, []);
 
   const handleLoginSuccess = () => {
+    localStorage.setItem("user", "true"); // Simule un utilisateur connecté
     setIsAuthenticated(true);
-    navigate("/dashboard");
+    navigate("/dashboard"); 
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    navigate("/"); 
   };
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <div className="App-header">
-        {isAuthenticated ? (
-          <GlobalPage />
-        ) : (
-          <Routes>
-            <Route path="/" element={<LoginPage onLoginSuccess={handleLoginSuccess} />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/chat" element={<Chat />} />
-          </Routes>
-        )}
+        <Routes>
+          {/* Si authentifié, on redirige vers le dashboard, sinon login */}
+          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />} />
+          {/* Dashboard accessible seulement si authentifié */}
+          <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
+          {/* Accès aux discussions uniquement si authentifié */}
+          <Route path="/chat" element={isAuthenticated ? <GlobalPage /> : <Navigate to="/" />} />
+          {/* Accès au planning uniquement si authentifié */}
+          <Route path="/planning" element={isAuthenticated ? <Planning /> : <Navigate to="/" />} />
+          {/* Mot de passe oublié accessible sans restriction */}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
       </div>
     </div>
   );

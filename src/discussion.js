@@ -1,5 +1,5 @@
 import React from "react";
-import discussionsData from "./discussions.json";
+import discussionsData from "./data/discussions.json";
 
 export default function Discussions({ onSelectDiscussion }) {
   return (
