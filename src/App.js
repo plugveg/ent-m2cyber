@@ -1,52 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import "./App.css";
-import LoginPage from "./page/login/LoginPage";
-import Dashboard from "./page/Dashboard";
-import ForgotPassword from "./page/login/ForgotPassword";
-import GlobalPage from "./page/GlobalePage";
-import Planning from "./page/Planning";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import AdminPage from "./page/Portail Admin";
+import LoginPage from "./components/LoginPage";
+import Dashboard from "./components/Dashboard";
+import ChatPage from "./components/ChatPage";
+import Planning from "./components/Planning";
+import AdminPortal from "./components/AdminPortal";
+import { useAuthStore } from "./store/authStore";
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
-  const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("user"));
-
-  useEffect(() => {
-    const checkAuthStatus = () => {
-      setIsAuthenticated(!!localStorage.getItem("user"));
-    };
-
-    window.addEventListener("storage", checkAuthStatus);
-    return () => window.removeEventListener("storage", checkAuthStatus);
-  }, []);
-
-  const handleLoginSuccess = () => {
-    setIsAuthenticated(true);
-    navigate("/dashboard");
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setIsAuthenticated(false);
-    navigate("/"); // 🔹 Redirige immédiatement après la déconnexion
-  };
+  const user = useAuthStore((state) => state.user);
 
   return (
-    <div className="App">
-      <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-      <div className="App-header">
-        <Routes>
-          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />} />
-          <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
-          <Route path="/chat" element={isAuthenticated ? <GlobalPage /> : <Navigate to="/" />} />
-          <Route path="/planning" element={isAuthenticated ? <Planning /> : <Navigate to="/" />} />
-          <Route path="/Portail_Admin" element={isAuthenticated ? <AdminPage /> : <Navigate to="/" />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        </Routes>
+    <Router> {/* ✅ Ce Router ne doit exister qu'une seule fois */}
+      <div className="min-h-screen bg-gray-100">
+        <Navbar />
+        <main className="container mx-auto px-4 py-8">
+          <Routes>
+            <Route path="/" element={user ? <Dashboard /> : <LoginPage />} />
+            <Route path="/dashboard" element={user ? <Dashboard /> : <LoginPage />} />
+            <Route path="/chat" element={user ? <ChatPage /> : <LoginPage />} />
+            <Route path="/planning" element={user ? <Planning /> : <LoginPage />} />
+            <Route path="/admin" element={user?.role === "admin" ? <AdminPortal /> : <Dashboard />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </Router>
   );
 }
 

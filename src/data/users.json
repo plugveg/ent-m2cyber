@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "chats": ["1", "2", "3"]
+    },
+    {
+      "id": "2",
+      "username": "teacher1",
+      "password": "teacher123",
+      "role": "user",
+      "chats": ["1", "2"]
+    },
+    {
+      "id": "3",
+      "username": "parent1",
+      "password": "parent123",
+      "role": "user",
+      "chats": ["1", "3"]
+    }
+  ]
+}
