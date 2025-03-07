@@ -72,6 +72,8 @@
   .edit-chat-btn, .delete-chat-btn {
     background: none;
     border: none;
+    color: #7289da;
+
     cursor: pointer;
   }
   
