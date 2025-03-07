@@ -4,15 +4,17 @@ import { useChatStore } from "../store/chatStore";
 
 export default function Dashboard() {
   const user = useAuthStore((state) => state.user);
-  const { chats } = useChatStore(); 
+  const { chats } = useChatStore();
 
-  // Filtrer les discussions auxquelles l'utilisateur a accès
-  const userChats = chats.filter(chat => user?.role === "admin" || chat.members.includes(user.id));
+  // ✅ Vérifier si chats est bien un tableau avant de l'utiliser
+  const userChats = Array.isArray(chats)
+    ? chats.filter(chat => user?.role === "admin" || chat.members?.includes(user.id))
+    : [];
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-box">
-      <h1 className="dashboard-title">
+        <h1 className="dashboard-title">
           Bienvenue, {user?.username}! 👋
         </h1>
         <p className="dashboard-info">
@@ -22,6 +24,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
-
-
