@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
+import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEventStore } from "../store/eventStore";
 import { useAuthStore } from "../store/authStore";
-import format from 'date-fns/format'
-import parse from 'date-fns/parse'
-import startOfWeek from 'date-fns/startOfWeek'
-import getDay from 'date-fns/getDay'
-import fr from 'date-fns/locale/fr'
 
-const locales = {
-  'fr': fr,
-}
-
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-})
+const localizer = momentLocalizer(moment);
 
 const messages = {
   allDay: "Toute la journée",
@@ -36,7 +21,6 @@ const messages = {
   event: "Événement",
   noEventsInRange: "Aucun événement prévu.",
 };
-
 export default function Planning() {
   const { events, addEvent, updateEvent, deleteEvent } = useEventStore();
   const user = useAuthStore((state) => state.user);
@@ -94,6 +78,10 @@ export default function Planning() {
           style={{ height: 500 }}
           onSelectEvent={handleSelectEvent}
           messages={messages}
+          formats={{
+            agendaDateFormat: (date, culture, localizer) =>
+              moment(date).format("DD/MM/YYYY"),
+          }}
         />
       </div>
 
@@ -135,6 +123,62 @@ export default function Planning() {
             </div>
           )}
           <button className="close-btn" onClick={handleCloseDetails}>Fermer</button>
+        </div>
+      )}
+
+      {/* Formulaire d'ajout/modification d'événement (réservé aux admins) */}
+      {user?.role === "admin" && (
+        <div className="planning-box">
+          <h2 className="planning-title">
+            {editingEvent ? "Modifier l'événement" : "Ajouter un événement"}
+          </h2>
+          <form onSubmit={handleAddEvent} className="planning-form">
+            <div className="input-group">
+              <label>Titre</label>
+              <input
+                type="text"
+                value={newEvent.title}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, title: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label>Description</label>
+              <textarea
+                value={newEvent.description}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, description: e.target.value })
+                }
+              />
+            </div>
+            <div className="input-group">
+              <label>Heure de début</label>
+              <input
+                type="datetime-local"
+                value={newEvent.startTime}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, startTime: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="input-group">
+              <label>Durée (minutes)</label>
+              <input
+                type="number"
+                value={newEvent.duration}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, duration: parseInt(e.target.value) })
+                }
+                required
+              />
+            </div>
+            <button type="submit" className="planning-btn">
+              {editingEvent ? "Modifier" : "Ajouter"}
+            </button>
+          </form>
         </div>
       )}
     </div>
