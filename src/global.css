@@ -41,11 +41,9 @@
   .container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    overflow: hidden;
   }
   
   /* =============================
@@ -62,6 +60,42 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+  }
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+  }
+  
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
   }
   
   .chat-list {
@@ -91,80 +125,6 @@
   }
   
   /* =============================
-     📝 Chat Styles
-     ============================= */
-  .chat-container {
-    margin-left: 270px;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .chat-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background: var(--background-light);
-    color: var(--text-dark);
-  }
-  
-  .chat-message {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .chat-message img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .message-content {
-    background: #40444b;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .chat-message.self .message-content {
-    background: var(--primary-color);
-  }
-  
-  /* =============================
-     🖊 Input & Buttons
-     ============================= */
-  .chat-input-container {
-    display: flex;
-    padding: 10px;
-    background: var(--background-dark);
-  }
-  
-  .chat-input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-  }
-  
-  .chat-button {
-    background: var(--secondary-color);
-    border: none;
-    padding: 10px 15px;
-    margin-left: 10px;
-    border-radius: 5px;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .chat-button:hover {
-    background: var(--button-hover);
-  }
-  
-  /* =============================
      🔗 Links Styling
      ============================= */
   a {
@@ -179,29 +139,6 @@
   /* =============================
      🔑 Login & Logout Styles
      ============================= */
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: var(--background-dark);
-  }
-  
-  .login-box {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 12px;
-    text-align: center;
-    color: white;
-  }
-  
-  .login-button {
-    background: var(--secondary-color);
-  }
-  
-  .login-button:hover {
-    background: var(--button-hover);
-  }
   
   /* Déconnexion */
   .logout-button {
