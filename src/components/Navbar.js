@@ -12,7 +12,7 @@ export default function Navbar() {
     navigate("/");
   };
 
-  if (!user) return null; // Ne pas afficher la navbar si l'utilisateur n'est pas connecté
+  if (!user) return null; 
 
   return (
     <nav className="navbar">
@@ -41,6 +41,11 @@ export default function Navbar() {
             </li>
           )}
         </ul>
+        <div className="user-info">
+        <span className="username">{user.username}</span>
+        <span className="user-role">({user.role})</span>
+        </div>
+
         <button onClick={handleLogout} className="logout-button">
           <LogOut className="icon" /> <span>Déconnexion</span>
         </button>
