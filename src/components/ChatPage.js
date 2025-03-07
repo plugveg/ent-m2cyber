@@ -1,7 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useAuthStore } from "../store/authStore";
 import { useChatStore } from "../store/chatStore";
-import { MessageSquare, Lock, PlusCircle, XCircle, Trash2, Edit3,Video, FileUp } from "lucide-react";
+import { MessageSquare, Lock, PlusCircle, Trash2, Edit3, Video, FileUp } from "lucide-react";
+import "../ChatPage.css"; // Importer le fichier CSS
+
+// Fonction pour choisir aléatoirement une icône d'avatar
+const getRandomAvatar = () => {
+  const icons = [
+    "/userIcons/etu.png",
+    "/userIcons/prof.png",
+    "/userIcons/icon3.png",
+    "/userIcons/icon4.png",
+    "/userIcons/icon5.png",
+  ];
+  return icons[Math.floor(Math.random() * icons.length)];
+};
 
 export default function ChatPage() {
   const user = useAuthStore((state) => state.user);
@@ -13,11 +26,20 @@ export default function ChatPage() {
   const [newChat, setNewChat] = useState({ title: "", type: "public", members: [user.id] });
   const [editChat, setEditChat] = useState(null);
   const fileInputRef = useRef();
+  const [userAvatar, setUserAvatar] = useState("");
 
   // Gestion de l'appel vidéo
   const [isVideoCall, setIsVideoCall] = useState(false);
   const [stream, setStream] = useState(null);
   const localVideoRef = useRef();
+
+  useEffect(() => {
+    if (!user.avatar) {
+   //   setUserAvatar(getRandomAvatar());
+    } else {
+      setUserAvatar(user.avatar);
+    }
+  }, [user]);
 
   const userChats = chats.filter((chat) =>
     user.role === "admin" ? true : chat.members?.includes(user.id)
@@ -25,13 +47,13 @@ export default function ChatPage() {
 
   const currentChat = userChats.find((chat) => chat.id === activeChat) || null;
 
-  // ✅ Fonction pour ajouter/supprimer un membre d'un chat
+  // Fonction pour ajouter/supprimer un membre d'un chat
   const toggleMember = (userId, chat, setChat) => {
     setChat((prevChat) => ({
       ...prevChat,
       members: prevChat.members.includes(userId)
-        ? prevChat.members.filter((id) => id !== userId) // ❌ Supprimer
-        : [...prevChat.members, userId], // ✅ Ajouter
+        ? prevChat.members.filter((id) => id !== userId) // Supprimer
+        : [...prevChat.members, userId], // Ajouter
     }));
   };
 
@@ -42,10 +64,13 @@ export default function ChatPage() {
     addMessage(activeChat, {
       id: Date.now().toString(),
       userId: user.id,
+      username: user.username, // Ajouter le nom de l'utilisateur
+      avatar: user.avatar, // Utiliser l'avatar de l'utilisateur
       content: message,
       timestamp: new Date().toISOString(),
     });
 
+    console.log(user);
     setMessage("");
   };
 
@@ -58,6 +83,8 @@ export default function ChatPage() {
     addMessage(activeChat, {
       id: Date.now().toString(),
       userId: user.id,
+      username: user.username, // Ajouter le nom de l'utilisateur
+      avatar: user.avatar, // Utiliser l'avatar de l'utilisateur
       content: file.name,
       fileUrl,
       timestamp: new Date().toISOString(),
@@ -88,7 +115,7 @@ export default function ChatPage() {
   };
 
   const handleEditChat = (chat) => {
-    setEditChat({ ...chat, members: [...(chat.members || [])] }); // ✅ S'assurer que les membres sont un tableau
+    setEditChat({ ...chat, members: [...(chat.members || [])] });
     setShowEditChatModal(true);
   };
 
@@ -99,7 +126,6 @@ export default function ChatPage() {
     setShowEditChatModal(false);
   };
 
-  // ✅ Démarrer l'appel vidéo et afficher la caméra
   const startVideoCall = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -116,7 +142,6 @@ export default function ChatPage() {
     }
   };
 
-  // ✅ Quitter l'appel vidéo
   const endVideoCall = () => {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
@@ -124,7 +149,6 @@ export default function ChatPage() {
     setStream(null);
     setIsVideoCall(false);
   };
-
 
   return (
     <div className="chat-container">
@@ -180,7 +204,6 @@ export default function ChatPage() {
               )}
             </div>
 
-            {/* 📌 Conteneur vidéo en direct */}
             {isVideoCall && (
               <div className="video-container">
                 <video ref={localVideoRef} autoPlay playsInline className="video-feed" />
@@ -189,38 +212,40 @@ export default function ChatPage() {
 
             <div className="chat-messages">
               {currentChat.messages.length > 0 ? (
-                currentChat.messages.map((msg) => (
-                  <div key={msg.id} className={`chat-message ${msg.userId === user.id ? "sent" : "received"}`}>
-                    {msg.type === "file" ? (
-                      <a href={msg.fileUrl} target="_blank" rel="noopener noreferrer">
-                        📎 {msg.content}
-                      </a>
-                    ) : (
-                      msg.content
-                    )}
-                    <span className="chat-timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
-                  </div>
-                ))
+                currentChat.messages.map((msg) => {
+                  const messageUser = users.find((u) => u.id === msg.userId);
+                  return (
+                    <div key={msg.id} className={`chat-message ${msg.userId === user.id ? "sent" : "received"}`}>
+                      <img src={messageUser?.avatar} alt={messageUser?.username} className="avatar" />
+                      <div className="message-content">
+                        <span className="username">{messageUser?.username}</span>
+                        {msg.type === "file" ? (
+                          <a href={msg.fileUrl} target="_blank" rel="noopener noreferrer">
+                            📎 {msg.content}
+                          </a>
+                        ) : (
+                          msg.content
+                        )}
+                        <span className="chat-timestamp">{new Date(msg.timestamp).toLocaleTimeString()}</span>
+                      </div>
+                    </div>
+                  );
+                })
               ) : (
                 <p className="no-messages">Aucun message</p>
               )}
             </div>
             <form onSubmit={handleSendMessage} className="chat-input">
               <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Écrire un message..." />
-              {/* Champ de sélection de fichier caché */}
               <input
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileUpload}
                 style={{ display: "none" }}
               />
-
-              {/* Bouton d'envoi de fichier */}
               <button type="button" onClick={() => fileInputRef.current?.click()} className="upload-btn">
                 Envoyer un fichier
               </button>
-
-
               <button type="submit" className="send-btn">Envoyer</button>
             </form>
           </>
@@ -229,7 +254,6 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/* Modals */}
       {showCreateChatModal && (
         <div className="modal">
           <div className="modal-content">
@@ -264,7 +288,7 @@ export default function ChatPage() {
         </div>
       )}
 
-{showEditChatModal && (
+      {showEditChatModal && (
         <div className="modal">
           <div className="modal-content">
             <h3>Modifier la discussion</h3>
