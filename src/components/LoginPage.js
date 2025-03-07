@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
+import '../css/LoginPage.css';
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -25,34 +26,34 @@ export default function LoginPage() {
       navigate("/dashboard");
       window.location.reload(); // Recharge l'état global
     } else {
-      setError("Identifiant ou mot de passe incorrect.");
+      setError("Identifiant ou mot de passe incorrect");
     }
   };
 
   return (
     <div className="login-container">
-      <div className="login-box">
+      <div className="login-card">
         <h2 className="login-title">Connexion</h2>
         <form onSubmit={handleLogin} className="login-form">
           <div className="input-group">
-            <label>Identifiant</label>
             <input
               type="text"
+              placeholder="Identifiant"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
           <div className="input-group">
-            <label>Mot de passe</label>
             <input
               type="password"
+              placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          {error && <p className="error-message">{error}</p>}
+          { error && <p className="error-message">{error}</p> }
           <button type="submit" className="login-button">Se connecter</button>
         </form>
         <button onClick={() => navigate("/forgot-password")} className="forgot-password">
