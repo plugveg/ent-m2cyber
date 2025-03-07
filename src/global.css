@@ -1,0 +1,214 @@
+/* =============================
+   🌟 Global Styles for Discord Clone 🌟
+   ============================= */
+
+/* 🎨 Variables de couleurs */
+:root {
+    --primary-color: #7289da;
+    --secondary-color: #ff6600;
+    --background-dark: #2c2f33;
+    --background-light: #23272a;
+    --text-light: #ffffff;
+    --text-dark: #dcdcdc;
+    --button-hover: #ff4500;
+    --link-color: #4aa3f0;
+    --link-hover: #ffcc00;
+  }
+  
+  /* 🌍 Reset général */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+  
+  /* =============================
+     📜 Layout général
+     ============================= */
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  /* =============================
+     🔒 Sidebar (Menu latéral)
+     ============================= */
+  .sidebar {
+    width: 250px;
+    background-color: var(--background-dark);
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .chat-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    overflow-y: auto;
+  }
+  
+  .chat-item {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .chat-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .private-chat::after {
+    content: '\1F512'; /* Icône de cadenas */
+    position: absolute;
+    right: 10px;
+  }
+  
+  /* =============================
+     📝 Chat Styles
+     ============================= */
+  .chat-container {
+    margin-left: 270px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--background-light);
+    color: var(--text-dark);
+  }
+  
+  .chat-message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .chat-message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .message-content {
+    background: #40444b;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .chat-message.self .message-content {
+    background: var(--primary-color);
+  }
+  
+  /* =============================
+     🖊 Input & Buttons
+     ============================= */
+  .chat-input-container {
+    display: flex;
+    padding: 10px;
+    background: var(--background-dark);
+  }
+  
+  .chat-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .chat-button {
+    background: var(--secondary-color);
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .chat-button:hover {
+    background: var(--button-hover);
+  }
+  
+  /* =============================
+     🔗 Links Styling
+     ============================= */
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--link-hover);
+  }
+  
+  /* =============================
+     🔑 Login & Logout Styles
+     ============================= */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--background-dark);
+  }
+  
+  .login-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+  }
+  
+  .login-button {
+    background: var(--secondary-color);
+  }
+  
+  .login-button:hover {
+    background: var(--button-hover);
+  }
+  
+  /* Déconnexion */
+  .logout-button {
+    background: var(--button-hover);
+  }
+  
+  .logout-button:hover {
+    background: #d63031;
+  }
+  
