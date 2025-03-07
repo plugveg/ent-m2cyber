@@ -1,7 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEventStore } from "../store/eventStore";
 import { useAuthStore } from "../store/authStore";
-import { format, parseISO } from "date-fns";
+import format from 'date-fns/format'
+import parse from 'date-fns/parse'
+import startOfWeek from 'date-fns/startOfWeek'
+import getDay from 'date-fns/getDay'
+import fr from 'date-fns/locale/fr'
+
+const locales = {
+  'fr': fr,
+}
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+})
+
+const messages = {
+  allDay: "Toute la journée",
+  previous: "Précédent",
+  next: "Suivant",
+  today: "Aujourd'hui",
+  month: "Mois",
+  week: "Semaine",
+  day: "Jour",
+  agenda: "Agenda",
+  date: "Date",
+  time: "Heure",
+  event: "Événement",
+  noEventsInRange: "Aucun événement prévu.",
+};
 
 export default function Planning() {
   const { events, addEvent, updateEvent, deleteEvent } = useEventStore();
@@ -12,10 +46,19 @@ export default function Planning() {
     startTime: "",
     duration: 60,
   });
-
   const [editingEvent, setEditingEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-  // Fonction pour ajouter un nouvel événement
+  // Convertir les événements au format attendu par react-big-calendar
+  const formattedEvents = events.map((event) => ({
+    id: event.id,
+    title: event.title,
+    start: new Date(event.startTime),
+    end: new Date(moment(event.startTime).add(event.duration, "minutes")),
+    description: event.description,
+  }));
+
+  // Gestion de l'ajout d'un événement
   const handleAddEvent = (e) => {
     e.preventDefault();
     if (!user || user.role !== "admin") return;
@@ -26,120 +69,72 @@ export default function Planning() {
     } else {
       addEvent({ id: Date.now().toString(), ...newEvent, createdBy: user.id });
     }
-
     setNewEvent({ title: "", description: "", startTime: "", duration: 60 });
   };
 
-  // Fonction pour charger un événement dans le formulaire pour modification
-  const handleEditEvent = (event) => {
-    setEditingEvent(event);
-    setNewEvent({
-      title: event.title,
-      description: event.description,
-      startTime: event.startTime,
-      duration: event.duration,
-    });
+  // Fonction pour gérer le clic sur un événement
+  const handleSelectEvent = (event) => {
+    setSelectedEvent(event);
   };
 
-  // Fonction pour supprimer un événement
-  const handleDeleteEvent = (eventId) => {
-    if (window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
-      deleteEvent(eventId);
-    }
+  // Fonction pour fermer la fenêtre des détails
+  const handleCloseDetails = () => {
+    setSelectedEvent(null);
   };
 
   return (
     <div className="planning-container">
       <div className="planning-box">
-        <h2 className="planning-title">Événements à venir</h2>
-        <div className="events-list">
-          {events.length > 0 ? (
-            events
-              .filter((event) => event.startTime) // On s'assure que startTime existe
-              .sort((a, b) => (a.startTime && b.startTime ? a.startTime.localeCompare(b.startTime) : 0))
-              .map((event) => (
-                <div key={event.id} className="event-card">
-                  <h3>{event.title}</h3>
-                  <p>{event.description}</p>
-                  <p>📅 {format(parseISO(event.startTime), "PPpp")}</p>
-                  <p>⏳ {event.duration} minutes</p>
-                  {user?.role === "admin" && (
-                    <div className="event-actions">
-                      <button
-                        className="edit-btn"
-                        onClick={() => handleEditEvent(event)}
-                      >
-                        ✏️ Modifier
-                      </button>
-                      <button
-                        className="delete-btn"
-                        onClick={() => handleDeleteEvent(event.id)}
-                      >
-                        ❌ Supprimer
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ))
-          ) : (
-            <p className="no-events">Aucun événement prévu.</p>
-          )}
-        </div>
+        <h2 className="planning-title">Calendrier des événements</h2>
+        <Calendar
+          localizer={localizer}
+          events={formattedEvents}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }}
+          onSelectEvent={handleSelectEvent}
+          messages={messages}
+        />
       </div>
 
-      {/* Formulaire d'ajout/modification d'événement (réservé aux admins) */}
-      {user?.role === "admin" && (
-        <div className="planning-box">
-          <h2 className="planning-title">
-            {editingEvent ? "Modifier l'événement" : "Ajouter un événement"}
-          </h2>
-          <form onSubmit={handleAddEvent} className="planning-form">
-            <div className="input-group">
-              <label>Titre</label>
-              <input
-                type="text"
-                value={newEvent.title}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, title: e.target.value })
-                }
-                required
-              />
+      {/* Affichage des détails d'un événement sélectionné */}
+      {selectedEvent && (
+        <div className="event-details">
+          <h3>{selectedEvent.title}</h3>
+          <p>{selectedEvent.description}</p>
+          <p>📅 Début: {moment(selectedEvent.start).format("LLLL")}</p>
+          <p>⏳ Durée: {moment(selectedEvent.end).diff(selectedEvent.start, "minutes")} minutes</p>
+          {user?.role === "admin" && (
+            <div className="event-actions">
+              <button
+                className="edit-btn"
+                onClick={() => {
+                  setEditingEvent(selectedEvent);
+                  setNewEvent({
+                    title: selectedEvent.title,
+                    description: selectedEvent.description,
+                    startTime: moment(selectedEvent.start).format("YYYY-MM-DDTHH:mm"),
+                    duration: moment(selectedEvent.end).diff(selectedEvent.start, "minutes"),
+                  });
+                  setSelectedEvent(null);
+                }}
+              >
+                ✏️ Modifier
+              </button>
+              <button
+                className="delete-btn"
+                onClick={() => {
+                  if (window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+                    deleteEvent(selectedEvent.id);
+                    setSelectedEvent(null);
+                  }
+                }}
+              >
+                ❌ Supprimer
+              </button>
             </div>
-            <div className="input-group">
-              <label>Description</label>
-              <textarea
-                value={newEvent.description}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, description: e.target.value })
-                }
-              />
-            </div>
-            <div className="input-group">
-              <label>Heure de début</label>
-              <input
-                type="datetime-local"
-                value={newEvent.startTime}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, startTime: e.target.value })
-                }
-                required
-              />
-            </div>
-            <div className="input-group">
-              <label>Durée (minutes)</label>
-              <input
-                type="number"
-                value={newEvent.duration}
-                onChange={(e) =>
-                  setNewEvent({ ...newEvent, duration: parseInt(e.target.value) })
-                }
-                required
-              />
-            </div>
-            <button type="submit" className="planning-btn">
-              {editingEvent ? "Modifier" : "Ajouter"}
-            </button>
-          </form>
+          )}
+          <button className="close-btn" onClick={handleCloseDetails}>Fermer</button>
         </div>
       )}
     </div>
