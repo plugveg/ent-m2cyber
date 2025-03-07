@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/authStore";
+import "../AdminPortal.css";
 
 export default function AdminPortal() {
   const { users, createUser, updateUserRole, deleteUser } = useAuthStore();
