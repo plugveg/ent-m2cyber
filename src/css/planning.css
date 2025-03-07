@@ -1,0 +1,188 @@
+.planning-container {
+  position: relative;
+  top: 30%
+}
+
+.input-form-planning {
+  background-color: white;
+}
+
+/* Popup modify */
+.event-details {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 90%;
+  z-index: 1000;
+  text-align: center;
+}
+
+.event-details h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.event-details p {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.edit-btn,
+.delete-btn,
+.close-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #333;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.close-btn {
+  background: #007bff;
+  color: white;
+  margin-top: 10px;
+}
+
+.edit-btn:hover {
+  background: #e0a800;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.close-btn:hover {
+  background: #0056b3;
+}
+
+/* Form add/modify */
+.planning-box-add {
+  background: #505050;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  max-width: 90%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.planning-calendar-title {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.planning-form-title {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.planning-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.input-group input,
+.input-group textarea {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #6e6e6e;
+  color: white;
+}
+
+.input-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.planning-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.planning-btn:hover {
+  background: #0056b3;
+}
+
+/* Calendar btn */
+.rbc-btn-group button {
+  background-color: #007bff;
+  /* Couleur de fond */
+  color: white;
+  /* Couleur du texte */
+  border: 1px solid #0056b3;
+  /* Bordure */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.rbc-btn-group button:hover {
+  background-color: #0056b3;
+  /* Couleur de survol */
+}
+
+.rbc-btn-group button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 91, 187, 0.5);
+}
+
+/* Mettre en évidence le bouton actif */
+.rbc-btn-group button.rbc-active {
+  background-color: #0056b3;
+  color: white;
+}

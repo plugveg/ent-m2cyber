@@ -4,6 +4,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useEventStore } from "../store/eventStore";
 import { useAuthStore } from "../store/authStore";
+import "../css/planning.css"
 
 const localizer = momentLocalizer(moment);
 
@@ -68,8 +69,8 @@ export default function Planning() {
 
   return (
     <div className="planning-container">
-      <div className="planning-box">
-        <h2 className="planning-title">Calendrier des événements</h2>
+      <div className="planning-box-display">
+        <h2 className="planning-calendar-title">Calendrier des événements</h2>
         <Calendar
           localizer={localizer}
           events={formattedEvents}
@@ -128,8 +129,8 @@ export default function Planning() {
 
       {/* Formulaire d'ajout/modification d'événement (réservé aux admins) */}
       {user?.role === "admin" && (
-        <div className="planning-box">
-          <h2 className="planning-title">
+        <div className="planning-box-add">
+          <h2 className="planning-form-title">
             {editingEvent ? "Modifier l'événement" : "Ajouter un événement"}
           </h2>
           <form onSubmit={handleAddEvent} className="planning-form">
