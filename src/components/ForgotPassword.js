@@ -35,7 +35,7 @@ export default function ForgotPassword() {
           <button type="submit" className='forgot-password-button'>Envoyer le lien de réinitialisation</button>
         </form>
         <div className="text-center">
-          <button type="button" onClick={() => navigate('/')} className="forgot-password-button">
+          <button type="button" onClick={() => navigate('/')} className="back-button">
             Retour à la connexion
           </button>
         </div>
