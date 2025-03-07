@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthStore } from "../store/authStore";
 import { useChatStore } from "../store/chatStore";
+import  '../css/Dashboard.css'
 
 export default function Dashboard() {
   const user = useAuthStore((state) => state.user);
