@@ -4,7 +4,7 @@ import { useChatStore } from "../store/chatStore";
 
 export default function Dashboard() {
   const user = useAuthStore((state) => state.user);
-  const { chats } = useChatStore(); // Récupérer toutes les discussions
+  const { chats } = useChatStore(); 
 
   // Filtrer les discussions auxquelles l'utilisateur a accès
   const userChats = chats.filter(chat => user?.role === "admin" || chat.members.includes(user.id));

@@ -12,7 +12,7 @@ export default function Navbar() {
     navigate("/");
   };
 
-  if (!user) return null; // Ne pas afficher la navbar si l'utilisateur n'est pas connecté
+  if (!user) return null; 
 
   return (
     <nav className="navbar">
