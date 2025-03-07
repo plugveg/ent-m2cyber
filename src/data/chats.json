@@ -1,0 +1,22 @@
+{
+    "chats": [
+      {
+        "id": "1",
+        "title": "Réunion Parents-Professeurs",
+        "type": "public",
+        "messages": []
+      },
+      {
+        "id": "2",
+        "title": "Désignation Prof Pédagogique",
+        "type": "private",
+        "messages": []
+      },
+      {
+        "id": "3",
+        "title": "Sortie Scolaire",
+        "type": "public",
+        "messages": []
+      }
+    ]
+  }

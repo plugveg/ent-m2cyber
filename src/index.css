@@ -1,72 +1,311 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #2c2f33;
+/* 🌟 Login Page Styling 🌟 */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1f1f1f, #333);
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  text-align: center;
   color: white;
+  width: 350px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.login-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  height: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #23272a;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  margin: 20px auto;
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
 }
 
-.chat-messages {
-  flex: 1;
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #ddd;
+}
+
+.input-group input {
+  width: 100%;
   padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+  outline: none;
 }
 
-.chat-message {
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.login-button {
+  width: 100%;
+  background: #ff6600;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-button:hover {
+  background: #ff4500;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.forgot-password {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgb(50, 117, 185);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.forgot-password:hover {
+  color: #ff6600;
+}
+
+/* 🌟 Dashboard Styling - Version WOW 🌟 */
+.dashboard-container {
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1f1f1f, #333);
+}
+
+.dashboard-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  color: white;
+  width: 400px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.chat-message.self {
-  flex-direction: row-reverse;
+.dashboard-role {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin: 0 10px;
+.dashboard-role span {
+  color: #ffcc00;
 }
 
-.message-content {
-  max-width: 70%;
-  background: #40444b;
-  padding: 8px 12px;
-  border-radius: 10px;
+.dashboard-info {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #ddd;
 }
 
-.chat-message.self .message-content {
-  background: #7289da;
+.dashboard-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.message-header {
+.dashboard-btn {
+  width: 100%;
+  background: #ff6600;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dashboard-btn:hover {
+  background: #ff4500;
+  transform: scale(1.05);
+}
+
+
+/* 🌟 Navbar Styling - Version WOW 🌟 */
+.navbar {
+  background: linear-gradient(135deg, #1f1f1f, #333);
+  padding: 15px 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
-  color: #b9bbbe;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.logout-button {
+  background: #ff4500;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background: #d63031;
+  transform: scale(1.05);
+}
+
+/* 🌟 Admin Portal Styling - Version WOW 🌟 */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #1f1f1f, #333);
+  min-height: 100vh;
+}
+
+.admin-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: white;
+  width: 450px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.admin-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  color: #ddd;
+}
+
+.input-group input, .input-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: rgb(255, 255, 255);
+  color: rgb(102, 96, 210);
+  font-size: 16px;
+  outline: none;
+}
+
+.admin-btn {
+  width: 100%;
+  background: #ff6600;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-btn:hover {
+  background: #ff4500;
+  transform: scale(1.05);
+}
+
+/* Liste des utilisateurs */
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  text-align: left;
 }
 
 .user-name {
@@ -74,66 +313,313 @@ code {
   color: white;
 }
 
-.message-text {
-  margin-top: 5px;
-  word-wrap: break-word;
+.user-role {
+  color: #ffcc00;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.role-select {
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.888);
+  color: rgb(80, 108, 221);
+  border: none;
+  outline: none;
+}
+
+.delete-btn {
+  background: #ff4444;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
+
+/* 🌟 Planning Page Styling - Version WOW 🌟 */
+.planning-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #1f1f1f, #333);
+  min-height: 100vh;
+}
+
+.planning-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: white;
+  width: 450px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.planning-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.planning-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  color: #ddd;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.planning-btn {
+  width: 100%;
+  background: #ff6600;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.planning-btn:hover {
+  background: #ff4500;
+  transform: scale(1.05);
+}
+
+/* Liste des événements */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.event-card h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.event-card p {
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.event-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #ffcc00;
+}
+
+.no-event {
+  color: #ddd;
+}
+
+/* 🌟 Planning Styling - Version WOW 🌟 */
+.planning-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: linear-gradient(135deg, #1f1f1f, #333);
+  min-height: 100vh;
+}
+
+.planning-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: white;
+  width: 450px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.planning-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.edit-btn {
+  background: #ffcc00;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.delete-btn {
+  background: #ff4444;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.planning-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.planning-btn {
+  background: #ff6600;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+/* 🌟 Chat Styling - Version WOW 🌟 */
+.chat-container {
+  display: flex;
+  height: 100vh;
+  background: #1f1f1f;
+}
+
+.chat-sidebar {
+  width: 300px;
+  background: #2c2f33;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-list {
+  margin-top: 20px;
+}
+
+.chat-item {
+  background: #3b3f45;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.chat-item:hover {
+  background: #4b4f55;
+}
+
+.chat-item.active {
+  background: #7289da;
+}
+
+.chat-content {
+  flex-grow: 1;
+  background: rgb(217, 218, 234);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  background: #424346;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.chat-message.sent {
+  background: #4b7ad9;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-message.received {
+  background: #e0e0e0;
+  color: black;
 }
 
 .chat-input {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-top: 1px solid #40444b;
-  outline: none;
-  background-color: #2c2f33;
-  color: white;
-  font-size: 16px;
-}
-
-.chat-input::placeholder {
-  color: #b9bbbe;
-}
-
-.uploaded-image {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 5px;
-}
-
-/* Styles pour la pop-up d'image */
-.image-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  padding: 15px;
+  background: #2c2f33;
 }
 
-.image-popup-content {
-  position: relative;
-}
-
-.image-popup img {
-  width: 100%;
-  height: auto;
-  max-height: 90vh;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
-}
-
-/* Bouton de fermeture */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 30px;
+.send-btn {
+  background: #ff6600;
+  padding: 12px;
+  border-radius: 6px;
   color: white;
-  cursor: pointer;
-  background: none;
-  border: none;
 }

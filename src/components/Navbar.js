@@ -1,53 +1,50 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import "./Navbar.css"; // Import du CSS
+import { useAuthStore } from "../store/authStore";
+import { Home, MessageSquare, Calendar, Settings, LogOut } from "lucide-react";
 
-export default function Navbar({ isAuthenticated, onLogout }) {
-    const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
+export default function Navbar() {
+  const navigate = useNavigate();
+  const { user, logout } = useAuthStore();
 
-    useEffect(() => {
-        const checkLoginStatus = () => {
-            const user = localStorage.getItem("user");
-            setIsLoggedIn(!!user);
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
-            // 🔹 Si l'utilisateur se déconnecte, rediriger immédiatement
-            if (!user) {
-                navigate("/");
-            }
-        };
+  if (!user) return null; // Ne pas afficher la navbar si l'utilisateur n'est pas connecté
 
-        window.addEventListener("storage", checkLoginStatus);
-        return () => {
-            window.removeEventListener("storage", checkLoginStatus);
-        };
-    }, [navigate]);
-
-    // Fonction pour gérer la déconnexion
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        setIsLoggedIn(false);
-        window.dispatchEvent(new Event("storage")); // 🔄 Mise à jour globale
-        onLogout(); // 🔹 Met à jour l'état d'authentification dans `App.js`
-    };
-
-    const user = JSON.parse(localStorage.getItem("user"));
-    const isAdmin = user && user.role === "admin";
-
-    return (
-        <nav className="navbar">
-            <ul>
-                {!isLoggedIn && <li><Link to="/">Accueil (Login)</Link></li>}
-                {isLoggedIn && <li><Link to="/dashboard">Dashboard</Link></li>}
-                {isLoggedIn && <li><Link to="/chat">Salon de Discussion</Link></li>}
-                {isLoggedIn && <li><Link to="/planning">Planning</Link></li>}
-                {isLoggedIn && isAdmin && <li><Link to="/Portail_Admin">Portail Admin</Link></li>}
-                {isLoggedIn && (
-                    <li>
-                        <button onClick={handleLogout} className="logout-button">Déconnexion</button>
-                    </li>
-                )}
-            </ul>
-        </nav>
-    );
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <ul className="nav-links">
+          <li>
+            <Link to="/dashboard" className="nav-item">
+              <Home className="icon" /> <span>Dashboard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/chat" className="nav-item">
+              <MessageSquare className="icon" /> <span>Discussions</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/planning" className="nav-item">
+              <Calendar className="icon" /> <span>Planning</span>
+            </Link>
+          </li>
+          {user.role === "admin" && (
+            <li>
+              <Link to="/admin" className="nav-item">
+                <Settings className="icon" /> <span>Admin</span>
+              </Link>
+            </li>
+          )}
+        </ul>
+        <button onClick={handleLogout} className="logout-button">
+          <LogOut className="icon" /> <span>Déconnexion</span>
+        </button>
+      </div>
+    </nav>
+  );
 }

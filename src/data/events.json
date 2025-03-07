@@ -1,8 +1,20 @@
 {
-    "events": [
-      { "id": 1, "title": "Réunion parents-professeurs", "day": "Lundi", "hour": "14", "duration": 2, "month": "Avril", "year": "2025" },
-      { "id": 2, "title": "Sortie scolaire", "day": "Mercredi", "hour": "10", "duration": 3, "month": "Avril", "year": "2025" },
-      { "id": 3, "title": "Conférence pédagogique", "day": "Vendredi", "hour": "16", "duration": 2, "month": "Mai", "year": "2025" }
-    ]
-  }
-  
+  "events": [
+    {
+      "id": "1",
+      "title": "Réunion parents-professeurs",
+      "description": "Réunion trimestrielle",
+      "startTime": "2025-04-15T14:00:00",
+      "duration": 120,
+      "createdBy": "1"
+    },
+    {
+      "id": "2",
+      "title": "Sortie scolaire",
+      "description": "Visite du musée",
+      "startTime": "2025-04-17T10:00:00",
+      "duration": 180,
+      "createdBy": "1"
+    }
+  ]
+}
