@@ -1,0 +1,139 @@
+/* =============================
+   🌟 Admin Portal Styles - Amélioré
+   ============================= */
+
+   @import url('./global.css'); /* Importation du fichier global pour garder la cohérence visuelle */
+
+   .admin-container {
+     max-width: 900px;
+     margin: 200px auto 50px; /* Ajout de marge en haut pour éviter le chevauchement */
+     padding: 30px;
+     background-color: var(--background-light);
+     border-radius: 12px;
+     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+     color: var(--text-dark);
+     position: relative;
+     z-index: 1; /* Assure que le composant ne passe pas au-dessus de la navbar */
+   }
+   
+   .admin-title {
+     text-align: center;
+     color: var(--primary-color);
+     font-size: 26px;
+     margin-bottom: 25px;
+   }
+   
+   .admin-form {
+     display: flex;
+     flex-direction: column;
+     gap: 20px;
+     padding: 20px;
+   }
+   
+   .input-group {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+   }
+   
+   .input-group label {
+     font-weight: bold;
+   }
+   
+   .input-group input, .input-group select {
+     padding: 12px;
+     border: 1px solid var(--text-dark);
+     border-radius: 6px;
+     background-color: var(--background-dark);
+     color: var(--text-light);
+     outline: none;
+     font-size: 16px;
+   }
+   
+   .admin-btn {
+     padding: 12px;
+     background-color: var(--primary-color);
+     border: none;
+     color: var(--text-light);
+     font-weight: bold;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: background 0.3s;
+     font-size: 16px;
+   }
+   
+   .admin-btn:hover {
+     background-color: var(--button-hover);
+   }
+   
+   /* =============================
+      📜 Gestion des utilisateurs - Améliorée
+      ============================= */
+   .user-list {
+     list-style: none;
+     padding: 0;
+     margin-top: 25px;
+   }
+   
+   .user-card {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     background: var(--background-dark);
+     color: var(--text-light);
+     padding: 15px;
+     border-radius: 8px;
+     margin-bottom: 15px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   }
+   
+   .user-info {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+   }
+   
+   .user-name {
+     font-weight: bold;
+     color: var(--primary-color);
+     font-size: 18px;
+   }
+   
+   .user-role {
+     font-size: 15px;
+     color: var(--text-dark);
+     margin-bottom: 10px;
+   }
+   
+   .user-actions {
+     display: flex;
+     align-items: center;
+     gap: 15px;
+   }
+   
+   .role-select {
+     padding: 8px;
+     border-radius: 6px;
+     background-color: var(--background-light);
+     color: var(--text-dark);
+     border: 1px solid var(--text-dark);
+     outline: none;
+     font-size: 14px;
+   }
+   
+   .delete-btn {
+     padding: 8px 14px;
+     background: #d63031;
+     border: none;
+     color: white;
+     font-weight: bold;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: background 0.3s;
+     font-size: 14px;
+   }
+   
+   .delete-btn:hover {
+     background: #ff4444;
+   }
+   
